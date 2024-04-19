@@ -1,0 +1,38 @@
+{% block title %}
+    Beispielhaushalte - Haushalt {{player.progress_personas}}
+{% endblock %}
+{% block content %}
+    {{player.text_personas_scenario}}
+
+    {{formfield 'personasChoice' label=""}}
+</p> </p>
+    <!-- Submit button for the form -->
+    <button id="submit_button" class="otree-btn-next btn btn-primary">Weiter</button>
+
+    <script>
+        var personas_choice_field = document.getElementById("id_personasChoice")
+        var submit_button = document.getElementById('submit_button');
+
+
+        window.addEventListener("DOMContentLoaded", (event) => {
+        // During load of the page, don't show the next button
+        submit_button.style.display = 'none'
+        const list = personas_choice_field.childNodes
+        list.forEach(function (item){
+            item.firstChild.checked = false;
+        })
+        })
+
+        // Check whenever the field value changes
+        personas_choice_field.addEventListener("change", function(){
+            submit_button.style.display = 'block';
+            const list = personas_choice_field.childNodes;
+            list.forEach(function (item) {
+                console.log(item.textContent)
+                console.log(item.firstChild.checked)
+            }, "myThisArg");
+
+        })
+    </script>
+
+{% endblock %}

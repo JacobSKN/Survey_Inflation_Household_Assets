@@ -1,0 +1,108 @@
+{{block title}}Demographie{{endblock}}
+
+{{block content}}
+
+<html>
+<head>
+    <script src="https://kit.fontawesome.com/38d9a9b751.js" crossorigin="anonymous"></script>
+    <style>
+        .info-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+        }
+  
+        .slider-container {
+            display: flex;
+            align-items: center;
+        }
+  
+        .slider-label {
+            width: 30px;
+            border: 0px;
+            text-align: center;
+        }
+  
+        .slider {
+            width: 90%;
+            flex: 1;
+        }
+
+        /* Hide popup by default */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .popup-content {
+            background-color: white;
+            margin: 20% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .popup h1 {
+            color: rgb(0, 0, 0);
+        }
+
+        .popup button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Your form fields -->
+    {{ formfield 'age' label="Wie alt sind Sie?" }}
+    {{ formfield 'gender' label="Mit welchem Geschlecht identifizieren Sie sich?" }}
+    {{ formfield 'education' label='Was ist der höchste Bildungsabschluss, den Sie erreicht haben?'}}
+    {{ formfield 'work' label='Wie ist Ihr aktuelles Beschäftigungsverhältnis?'}}
+    {{ formfield 'income' label="Wie hoch war Ihr Nettoeinkommen im letzten Monat?"}}
+    {{ formfield 'stock_market_participate' label="Investieren Sie in Aktien/Aktienfonds oder andere Wertpapiere wie Anleihen, Derivate oder Kryptowährungen?" }}
+</p> </p>
+    <!-- Next button for the form -->
+    <button id="next_button_contribution" class="otree-btn-next btn btn-primary">Weiter</button>
+
+    <script>
+        const showInfoButton = document.getElementById("showInfo");
+        const myPopup = document.getElementById("myPopup");
+        const closePopupButton = document.getElementById("closePopup");
+
+        // Show popup when info button is clicked
+        showInfoButton.addEventListener("click", function() {
+            myPopup.style.display = "block";
+        });
+
+        // Close popup when close button is clicked
+        closePopupButton.addEventListener("click", function() {
+            myPopup.style.display = "none";
+        });
+
+        // Close popup when clicking outside of it
+        window.addEventListener("click", function(event) {
+            if (event.target === myPopup) {
+                myPopup.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+{{endblock}}

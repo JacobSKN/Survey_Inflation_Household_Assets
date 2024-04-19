@@ -1,0 +1,94 @@
+{{block title}}Eigeneinschätzung{{endblock}}
+{{block content}}
+
+<style>
+  /* Table styles */
+  table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  th, td {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+  }
+
+  th {
+      background-color: #f2f2f2;
+      text-align: center; /* Center align text in header */
+  }
+
+  /* Center the radio buttons */
+  .radio-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+  }
+
+  input[type="radio"] {
+      margin: 0; /* Remove default margin */
+  }
+</style>
+
+
+Bewerten Sie die Auswirkungen eines Anstiegs der Inflation auf den Wert der folgenden Finanzanlagen:
+</p></p>
+
+<form method="post" id="likertForm" style="margin-bottom: 20px;">
+  
+  <table>
+    <tr>
+        <th></th>
+        {% for k, column_name in column_names.items %}
+            <th>{{ column_name }}</th>
+        {% endfor %}
+    </tr>
+    {% for i, row_name in row_names.items %}
+        <tr>
+            <td>{{ row_name }}</td>
+            {% for j in range(1, 6) %}
+                <td>
+                    <label class="radio-inline">
+                        <input type="radio" name="likert_{{ i }}" value="{{ j }}">
+                    </label>
+                </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+</form>
+
+</p></p>
+<button id="next_button_contribution" class="otree-btn-next btn btn-primary">Weiter</button>
+
+<script>
+    var nextButtonContribution = document.getElementById('next_button_contribution');
+    nextButtonContribution.style.display = 'none'; // Hide the button initially
+
+    var radioInputs = document.querySelectorAll('input[type="radio"]');
+    console.log(radioInputs)
+    var all_rows_checked = {"likert_1": false, "likert_2": false, "likert_3": false, "likert_4": false, "likert_5": false}
+    radioInputs.forEach(function(input) {
+        input.addEventListener('change', function() {
+            var radioName = this.getAttribute('name');
+            all_rows_checked[radioName] = true;
+            var hasFalseValue = false;
+            for (var key in all_rows_checked) {
+            if (all_rows_checked[key] === false) {
+                hasFalseValue = true;
+                break; // Exit the loop if a false value is found
+            }
+        }
+        if (hasFalseValue) {
+            nextButtonContribution.style.display = "none"; // Disable the button if any value is false
+        } else {
+            nextButtonContribution.style.display = "block" // Enable the button if all values are true
+        }
+        });
+    });
+</script>
+
+
+{{endblock}}

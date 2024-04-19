@@ -1,0 +1,139 @@
+{% block title %}
+    Produktauswahl in Inflationsszenarien - Szenario {{player.progress}}
+{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/38d9a9b751.js" crossorigin="anonymous"></script>
+    <style>
+        .info-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-label {
+            width: 30px;
+            border: 0px;
+            text-align: center;
+        }
+
+        .slider {
+            width: 70%; /* Adjusted width for better display */
+            flex: 1;
+        }
+
+        .input-field {
+            width: 20%; /* Width for the input field */
+            margin-left: 10px; /* Space between slider and input field */
+        }
+    </style>
+</head>
+<body>
+
+{{player.text_share_products_scenario}}
+
+<p></p>
+Girokonto:
+<div class="slider-container">
+    <input type="text" id="min_value1" value="0" readonly class="slider-label">
+    <input id="checking_account_set" type="range" name="checking_account_value" min="0" max="100" step="1" oninput="updateTotalValue()" class="slider" value="0">
+    <input type="text" id="max_value1" value="100" readonly class="slider-label">
+    <input type="number" id="input_field1" class="input-field" oninput="updateSliderValue(this)">
+</div>
+Tagesgeldkonto:
+<div class="slider-container">
+    <input type="text" id="min_value2" value="0" readonly class="slider-label">
+    <input id="overnight_set" type="range" name="overnight_value" min="0" max="100" step="1" oninput="updateTotalValue()" class="slider" value="0">
+    <input type="text" id="max_value2" value="100" readonly class="slider-label">
+    <input type="number" id="input_field2" class="input-field" oninput="updateSliderValue(this)">
+</div>
+Festgeldkonto:
+<div class="slider-container">
+    <input type="text" id="min_value5" value="0" readonly class="slider-label">
+    <input id="fixed_deposit_set" type="range" name="fixed_deposit_value" min="0" max="100" step="1" oninput="updateTotalValue()" class="slider" value="0">
+    <input type="text" id="max_value5" value="100" readonly class="slider-label">
+    <input type="number" id="input_field5" class="input-field" oninput="updateSliderValue(this)">
+</div>
+Staatsanleihen:
+<div class="slider-container">
+    <input type="text" id="min_value3" value="0" readonly class="slider-label">
+    <input id="bonds_set" type="range" name="bonds_value" min="0" max="100" step="1" oninput="updateTotalValue()" class="slider" value="0">
+    <input type="text" id="max_value3" value="100" readonly class="slider-label">
+    <input type="number" id="input_field3" class="input-field" oninput="updateSliderValue(this)">
+</div>
+Aktien/Aktienfonds:
+<div class="slider-container">
+    <input type="text" id="min_value4" value="0" readonly class="slider-label">
+    <input id="stocks_set" type="range" name="stocks_value" min="0" max="100" step="1" oninput="updateTotalValue()" class="slider" value="0">
+    <input type="text" id="max_value4" value="100" readonly class="slider-label">
+    <input type="number" id="input_field4" class="input-field" oninput="updateSliderValue(this)">
+</div>
+</p> </p>
+<p id="total_value">Aktuell verwendeter Anteil Ihres Geldes: </p>
+</p> </p>
+<button id="next_button_contribution" class="otree-btn-next btn btn-primary" onclick="checkInvestment()">Weiter</button>
+
+<script>
+    const slider_checking_account = document.getElementById('checking_account_set');
+    const slider_overnight = document.getElementById('overnight_set');
+    const slider_fixed_deposit = document.getElementById('fixed_deposit_set')
+    const slider_bonds = document.getElementById('bonds_set');
+    const slider_stocks = document.getElementById('stocks_set');
+    const total_value = document.getElementById('total_value');
+    let total_percentage = 0;
+
+    function updateTotalValue() {
+        const checking_account_value = parseInt(slider_checking_account.value);
+        const overnight_value = parseInt(slider_overnight.value);
+        const fixed_deposit_value = parseInt(slider_fixed_deposit.value);
+        const bonds_value = parseInt(slider_bonds.value);
+        const stocks_value = parseInt(slider_stocks.value);
+
+        total_percentage = checking_account_value + overnight_value + fixed_deposit_value + bonds_value + stocks_value;
+
+        total_value.textContent = `Aktuell verwendeter Anteil Ihres Geldes: ${total_percentage}%`;
+
+        if (total_percentage != 100){
+            const nextButton = document.getElementById("next_button_contribution");
+            nextButton.style.display = 'none'
+        }
+        else {
+            next_button_contribution.style.display = 'block'
+        }
+    }
+
+    function updateSliderValue(input) {
+        var input_field_slider = {"input_field1" : 'checking_account_set', "input_field2" : 'overnight_set', "input_field3" : 'bonds_set', "input_field4" : 'stocks_set', 'input_field5' : 'fixed_deposit_set'};
+        const slider_id = input_field_slider[input.id];
+        const slider = document.getElementById(slider_id);
+        const updatedValue = parseInt(input.value);
+
+        // Check if the input value is within the slider range
+        if (updatedValue >= parseInt(slider.min) && updatedValue <= parseInt(slider.max)) {
+            slider.value = updatedValue;
+        }
+
+        updateTotalValue();
+    }
+
+    window.addEventListener("DOMContentLoaded", (event) => {
+        // During load of the page, don't show the next button
+        next_button_contribution.style.display = 'none'
+    })
+
+
+</script>
+
+</body>
+</html>
+
+{{endblock}}

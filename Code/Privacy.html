@@ -1,0 +1,44 @@
+{{block title}}Datenschutz{{endblock}}
+{{block content}}
+
+Auf den folgenden Seiten wollen wir Ihnen ein paar Fragen zum Thema "Anfälligkeit von Finanzprodukten in verschiedenen Inflationsszenarien" stellen.
+</p> </p>
+Zum Abschluss des Fragebogens wollen wir zudem nähere Informationen zu Ihrer Person abfragen, um dadurch bei den Ergebnissen auch soziale Faktoren (Alter, Gehalt und Berufsstand) einzubeziehen und so die Bewertung verbessern zu können.
+</p> </p>
+Die Teilnahme an dieser Umfrage ist ohne Nennung Ihres Namens möglich.
+</p> </p>
+Auch bei einer Umfrage haben Sie gemäß Datenschutz gegenüber dem Informationsträger das Recht auf Auskunft sowie Löschung Ihrer personenbezogenen Daten. Sie können diese Einwilligungserklärung jederzeit widerrufen. Nach erfolgtem Widerruf werden Ihre Daten gelöscht und unzugänglich aufbewahrt.
+</p> </p>
+
+<!-- Definition of the variables used for the understanding of the introduction-->
+<input type="radio" id="option1" name="understanding_introduction" oninput="update_next_button_introduction()">
+<label for="option1">Ich stimme der Datenschutzvereinbarung zu und möchte an der Umfrage teilnehmen.</label><br>
+</p> </p>
+<!-- Definition of the next button for the page-->
+<button id="next_button_contribution" class="otree-btn-next btn btn-primary">Weiter</button>
+
+<script>
+    // Assignment of the variables to the elements in the document
+    const radio_button_intro = document.getElementById("option1")
+    var next_button_contribution = document.getElementById('next_button_contribution')
+
+    function update_next_button_introduction(){
+        // Check whether the radio button of the understanding is clicked, then show the next button
+        if (radio_button_intro.checked){
+            next_button_contribution.style.display = 'block'
+        } else{
+            next_button_contribution.style.display = 'none'
+        }
+    }
+
+    window.addEventListener("DOMContentLoaded", (event) => {
+        // During load of the page, don't show the next button
+        next_button_contribution.style.display = 'none'
+    })
+
+
+</script>
+
+
+
+{{endblock}}
