@@ -42,6 +42,7 @@
 {{player.text_share_products_scenario}}
 
 <p></p>
+<!-- Slider container are defined for each asset class containing the lowest (0) and the highest (100) value. Additionally, a input field is definded to type in an individual number-->
 Girokonto:
 <div class="slider-container">
     <input type="text" id="min_value1" value="0" readonly class="slider-label">
@@ -78,6 +79,7 @@ Aktien/Aktienfonds:
     <input type="number" id="input_field4" class="input-field" oninput="updateSliderValue(this)">
 </div>
 </p> </p>
+<!-- Definition of text field presenting the percentage invested right now-->
 <p id="total_value">Aktuell verwendeter Anteil Ihres Geldes: </p>
 </p> </p>
 <button id="next_button_contribution" class="otree-btn-next btn btn-primary" onclick="checkInvestment()">Weiter</button>
@@ -92,6 +94,7 @@ Aktien/Aktienfonds:
     let total_percentage = 0;
 
     function updateTotalValue() {
+        // values for the slider are parsed, added and checked against 100%; if the 100% are not reached, the next button is blocked 
         const checking_account_value = parseInt(slider_checking_account.value);
         const overnight_value = parseInt(slider_overnight.value);
         const fixed_deposit_value = parseInt(slider_fixed_deposit.value);
@@ -112,6 +115,7 @@ Aktien/Aktienfonds:
     }
 
     function updateSliderValue(input) {
+        // function to update the slider based on the individual value typed into the field next to it
         var input_field_slider = {"input_field1" : 'checking_account_set', "input_field2" : 'overnight_set', "input_field3" : 'bonds_set', "input_field4" : 'stocks_set', 'input_field5' : 'fixed_deposit_set'};
         const slider_id = input_field_slider[input.id];
         const slider = document.getElementById(slider_id);
