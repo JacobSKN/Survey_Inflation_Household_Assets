@@ -1,6 +1,6 @@
 # Survey on the impact of inflation on asset classes
 
-This is the repository for the survey on the impact of inflation on asset classes and how it is perceived by households.
+This is the repository for the survey on the impact of inflation on asset classes and how it is perceived by households. The screenshots presenting this survey can be found in the survey_screenshots.pdf.
 
 ## Requirements
 
